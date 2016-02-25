@@ -11,7 +11,6 @@ var browserA = matrix.select('browserA');
 var browserB = matrix.select('browserB');
 
 describe('Chatting', function() {
-
   it('should post something in browserA and read in browserB', function(done) {
     browserA
       .init().url('http://localhost:3000')
@@ -23,9 +22,10 @@ describe('Chatting', function() {
         .pause(100)
         .waitForExist('.ind_msg', 5000)
         .getText('body', function(err, text) {
-          expect(text).to.include('My name is Hello');
-        });
+          expect(text).to.include('My name is Arnold');
+        })
+        .call(done);
 
-      matrix.sync().call(done).end();
+      matrix.sync().end();
   });
 });
