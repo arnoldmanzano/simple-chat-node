@@ -15,8 +15,12 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
   console.log('a user connected');
+  socket.on('send message', function(msg) {
+    io.emit('print message', msg);
+    // socket.broadcast.emit('hi');
+  });
   socket.on('disconnect', function(){
-    console.log('a user disconnected');    
+    console.log('a user disconnected');
   });
 });
 
