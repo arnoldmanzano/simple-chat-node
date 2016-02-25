@@ -11,7 +11,6 @@ var WebdriverIO = require('webdriverio'),
 
 
 describe('Chatting', function() {
-  WebdriverIO.timeout = 99999999;
 
   it('should post something in browserA and read in browserB', function(done) {
     browserA
