@@ -16,11 +16,15 @@ var io = require('socket.io')(server);
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('send message', function(msg) {
+    // socket.emit('print message', msg);
+    // socket.broadcast.emit('print message', msg);
     io.emit('print message', msg);
-    // socket.broadcast.emit('hi');
   });
   socket.on('disconnect', function(){
     console.log('a user disconnected');
+  });
+  socket.on('typingMessage', function(msg) {
+    socket.broadcast.emit('is typing');
   });
 });
 
