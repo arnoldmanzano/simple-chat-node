@@ -24,7 +24,7 @@ io.on('connection', function(socket){
     console.log('a user disconnected');
   });
   socket.on('typingMessage', function(msg) {
-    socket.broadcast.emit('is typing');
+    socket.broadcast.emit('istyping', msg);
   });
 });
 

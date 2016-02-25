@@ -6,6 +6,8 @@ describe('Welcome page', function() {
     browser
       .pause(100)
       .url('/')
+      .alertText("Arnold")
+      .alertAccept()
       .getText('body', function(err, text) {
         expect(text).to.include('Welcome to SimpleChat');
       })

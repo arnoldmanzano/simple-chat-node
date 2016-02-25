@@ -4,9 +4,17 @@ $(document).ready(function() {
   var typing = false;
   var timeout;
 
+  var user = prompt("Please enter your name", "user" + Math.floor(Math.random()*100));
+
+  if (user === null || user === '') {
+    user = "user" + Math.floor(Math.random()*100);
+  }
+
+  $('#m').focus();
+
   $('form').submit(function(){
     console.log($('#m').val());
-    socket.emit('send message', $('#m').val());
+    socket.emit('send message', user + ": " + $('#m').val());
     $('#m').val('');
     return false;
   });
@@ -31,7 +39,7 @@ $(document).ready(function() {
   function onKeyDownNotEnter(){
     if(typing === false) {
       typing = true;
-      socket.emit('typingMessage', 'typing');
+      socket.emit('typingMessage', user);
       timeout = setTimeout(timeoutFunction, 5000);
     } else {
       clearTimeout(timeout);
@@ -39,7 +47,7 @@ $(document).ready(function() {
     }
   }
 
-  socket.on('is typing', function() {
-    $('#messages').append( "<li class='ind_msg'>someone is typing...");
+  socket.on('istyping', function(msg) {
+    $('#messages').append( "<li class='ind_msg'>" + msg + " is typing...");
   });
 });

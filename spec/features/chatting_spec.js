@@ -14,11 +14,15 @@ describe('Chatting', function() {
   it('should post something in browserA and read in browserB', function(done) {
     browserA
       .init().url('http://localhost:3000')
+      .alertText("Arnold")
+      .alertAccept()
       .pause(100)
       .setValue('#m', 'My name is Arnold').keys('Enter');
 
       browserB
         .init().url('http://localhost:3000')
+        .alertText("Bob")
+        .alertAccept()
         .pause(100)
         .waitForExist('.ind_msg', 5000)
         .getText('body', function(err, text) {
